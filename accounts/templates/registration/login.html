@@ -1,0 +1,47 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Library Management System {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+<div class="container">
+<br>
+<h1 class="text-center"><u>Student Login</u></h1>
+    <form method="POST" action="{% url 'login' %}"> {% csrf_token %}
+
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Username</i></label>
+            <input type="{{ form.username }}" class="form-control mt-2" name="username" placeholder="Enter Username" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Password</i></label>
+            <input type="{{ form.password }}" class="form-control mt-2" name="password" placeholder="Enter Password" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-primary mt-4">Login</button>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    // {% if alert %}
+    // alert("Invalid Username or Password.")
+    // document.location = "/student_login"
+    // {% endif %}
+</script>
+{% endblock %}
